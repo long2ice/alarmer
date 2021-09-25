@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "alerter"
+version = "0.1.0"
+description = ""
+authors = ["long2ice <long2ice@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+apprise = "*"
+
+[tool.poetry.dev-dependencies]
+flake8 = "*"
+isort = "*"
+black = "*"
+pytest = "*"
+pytest-xdist = "*"
+pytest-asyncio = "*"
+mypy = "*"
+bandit = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
