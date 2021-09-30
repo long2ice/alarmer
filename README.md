@@ -99,7 +99,7 @@ class EmailProvider(Provider):
 
 ## Throttling
 
-`Throttling` is used to throttle error messages.
+`Throttling` is used to throttling error messages if there are too many errors.
 
 ```py
 from alarmer import Alarmer
@@ -127,13 +127,12 @@ class Throttling(abc.ABC):
         self.last_time = time.time()
         self.lock = threading.Lock()
 
-    def __call__(self, provider: "Provider", exc, value, tb) -> bool:
+    def __call__(self, provider: "Provider", message: str) -> bool:
         with self.lock:
             if time.time() - self.last_time < 1:
                 return False
             self.last_time = time.time()
             return True
-
 ```
 
 ## License
