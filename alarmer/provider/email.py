@@ -1,7 +1,7 @@
 import smtplib
 from typing import List
 
-from alerter.provider import Provider
+from alarmer.provider import Provider
 
 
 class EmailProvider(Provider):

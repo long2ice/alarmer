@@ -4,7 +4,7 @@ import time
 import typing
 
 if typing.TYPE_CHECKING:
-    from alerter import Provider
+    from alarmer import Provider
 
 
 class Throttling(abc.ABC):

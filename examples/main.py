@@ -2,13 +2,13 @@ import logging
 import os
 import time
 
-from alerter import Alerter
-from alerter.log import LoggingHandler
-from alerter.provider.feishu import FeiShuProvider
+from alarmer import Alarmer
+from alarmer.log import LoggingHandler
+from alarmer.provider.feishu import FeiShuProvider
 
 
 def main():
-    Alerter.init(providers=[FeiShuProvider(webhook_url=os.getenv("FEI_SHU_WEBHOOK_URL"))])
+    Alarmer.init(providers=[FeiShuProvider(webhook_url=os.getenv("FEI_SHU_WEBHOOK_URL"))])
     logging.basicConfig(
         level=logging.INFO,
     )

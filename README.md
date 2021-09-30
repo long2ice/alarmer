@@ -1,31 +1,31 @@
-# alerter
+# alarmer
 
-[![image](https://img.shields.io/pypi/v/alerter.svg?style=flat)](https://pypi.python.org/pypi/alerter)
-[![image](https://img.shields.io/github/license/tortoise/alerter)](https://github.com/tortoise/alerter)
-[![image](https://github.com/tortoise/alerter/workflows/pypi/badge.svg)](https://github.com/tortoise/alerter/actions?query=workflow:pypi)
-[![image](https://github.com/tortoise/alerter/workflows/ci/badge.svg)](https://github.com/tortoise/alerter/actions?query=workflow:ci)
+[![image](https://img.shields.io/pypi/v/alarmer.svg?style=flat)](https://pypi.python.org/pypi/alarmer)
+[![image](https://img.shields.io/github/license/tortoise/alarmer)](https://github.com/tortoise/alarmer)
+[![image](https://github.com/tortoise/alarmer/workflows/pypi/badge.svg)](https://github.com/tortoise/alarmer/actions?query=workflow:pypi)
+[![image](https://github.com/tortoise/alarmer/workflows/ci/badge.svg)](https://github.com/tortoise/alarmer/actions?query=workflow:ci)
 
-`Alerter` is a tool focus on error reporting for your application.
+`Alarmer` is a tool focus on error reporting for your application.
 
 ## Installation
 
 ```shell
-pip install alerter
+pip install alarmer
 ```
 
 ## Usage
 
-It's simple to integrate `alerter` in your application, just call `Alerter.init` on startup of your application.
+It's simple to integrate `alarmer` in your application, just call `Alarmer.init` on startup of your application.
 
 ```py
 import os
 
-from alerter import Alerter
-from alerter.provider.feishu import FeiShuProvider
+from alarmer import Alarmer
+from alarmer.provider.feishu import FeiShuProvider
 
 
 def main():
-    Alerter.init(providers=[FeiShuProvider(webhook_url=os.getenv("FEI_SHU_WEBHOOK_URL"))])
+    Alarmer.init(providers=[FeiShuProvider(webhook_url=os.getenv("FEI_SHU_WEBHOOK_URL"))])
     raise Exception("test")
 
 
@@ -41,13 +41,13 @@ If you want to intercept the `ERROR` level logging, you can use `LoggingHandler`
 import logging
 import os
 
-from alerter import Alerter
-from alerter.log import LoggingHandler
-from alerter.provider.feishu import FeiShuProvider
+from alarmer import Alarmer
+from alarmer.log import LoggingHandler
+from alarmer.provider.feishu import FeiShuProvider
 
 
 def main():
-    Alerter.init(providers=[FeiShuProvider(webhook_url=os.getenv("FEI_SHU_WEBHOOK_URL"))])
+    Alarmer.init(providers=[FeiShuProvider(webhook_url=os.getenv("FEI_SHU_WEBHOOK_URL"))])
     logging.basicConfig(
         level=logging.INFO,
     )
@@ -66,7 +66,7 @@ Now when you run the script, you will receive the errors in your provider.
 ## Provider
 
 You can set number of providers for error reporting. All kinds of providers can be found
-in [providers](./alerter/provider).
+in [providers](./alarmer/provider).
 
 - Email
 - [FeiShu](https://www.feishu.cn/hc/zh-CN/articles/360024984973)
@@ -80,7 +80,7 @@ You can write your own custom provider by inheriting the `Provider` class.
 import smtplib
 from typing import List
 
-from alerter.provider import Provider
+from alarmer.provider import Provider
 
 
 class EmailProvider(Provider):
@@ -102,10 +102,10 @@ class EmailProvider(Provider):
 `Throttling` is used to throttle error messages.
 
 ```py
-from alerter import Alerter
-from alerter.throttling import Throttling
+from alarmer import Alarmer
+from alarmer.throttling import Throttling
 
-Alerter.init(global_throttling=Throttling(), providers=[...])
+Alarmer.init(global_throttling=Throttling(), providers=[...])
 ```
 
 ### Custom Throttling
@@ -119,7 +119,7 @@ import time
 import typing
 
 if typing.TYPE_CHECKING:
-    from alerter import Provider
+    from alarmer import Provider
 
 
 class Throttling(abc.ABC):
@@ -139,4 +139,4 @@ class Throttling(abc.ABC):
 ## License
 
 This project is licensed under the
-[Apache-2.0](https://github.com/long2ice/alerter/blob/master/LICENSE) License.
+[Apache-2.0](https://github.com/long2ice/alarmer/blob/master/LICENSE) License.

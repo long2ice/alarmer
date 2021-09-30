@@ -1,16 +1,16 @@
 [tool.poetry]
-name = "alerter"
+name = "alarmer"
 version = "0.1.0"
 description = "A tool focus on error reporting for your application"
 authors = ["long2ice <long2ice@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
-homepage = "https://github.com/long2ice/alerter"
-repository = "https://github.com/long2ice/alerter.git"
-documentation = "https://github.com/long2ice/alerter"
-keywords = ["sentry", "error", "Alert"]
+homepage = "https://github.com/long2ice/alarmer"
+repository = "https://github.com/long2ice/alarmer.git"
+documentation = "https://github.com/long2ice/alarmer"
+keywords = ["sentry", "error", "alert", "alarm"]
 packages = [
-    { include = "alerter" }
+    { include = "alarmer" }
 ]
 include = ["CHANGELOG.md", "LICENSE", "README.md"]
 

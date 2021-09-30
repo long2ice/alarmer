@@ -1,4 +1,4 @@
-checkfiles = alerter/ tests/ examples/ conftest.py
+checkfiles = alarmer/ tests/ examples/ conftest.py
 black_opts = -l 100 -t py38
 py_warn = PYTHONDEVMODE=1
 
@@ -25,3 +25,6 @@ build: deps
 	@poetry build
 
 ci: check test
+
+publish:
+	@poetry publish --build

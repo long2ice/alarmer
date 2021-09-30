@@ -4,11 +4,11 @@ from typing import Callable, List, Optional
 
 import better_exceptions  # type:ignore
 
-from alerter.provider import Provider
-from alerter.throttling import Throttling
+from alarmer.provider import Provider
+from alarmer.throttling import Throttling
 
 
-class Alerter:
+class Alarmer:
     _old_except_hook: Callable
     _providers: List[Provider]
     _pool: ThreadPoolExecutor

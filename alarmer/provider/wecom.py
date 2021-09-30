@@ -1,6 +1,6 @@
 import requests
 
-from alerter import Provider
+from alarmer import Provider
 
 
 class WeComProvider(Provider):

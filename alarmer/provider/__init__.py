@@ -1,7 +1,7 @@
 import abc
 from typing import Optional
 
-from alerter.throttling import Throttling
+from alarmer.throttling import Throttling
 
 
 class Provider(abc.ABC):
