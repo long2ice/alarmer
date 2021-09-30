@@ -2,8 +2,8 @@
 
 [![image](https://img.shields.io/pypi/v/alarmer.svg?style=flat)](https://pypi.python.org/pypi/alarmer)
 [![image](https://img.shields.io/github/license/tortoise/alarmer)](https://github.com/tortoise/alarmer)
-[![image](https://github.com/tortoise/alarmer/workflows/pypi/badge.svg)](https://github.com/tortoise/alarmer/actions?query=workflow:pypi)
-[![image](https://github.com/tortoise/alarmer/workflows/ci/badge.svg)](https://github.com/tortoise/alarmer/actions?query=workflow:ci)
+[![pypi](https://github.com/long2ice/alarmer/actions/workflows/pypi.yml/badge.svg)](https://github.com/long2ice/alarmer/actions/workflows/pypi.yml)
+[![ci](https://github.com/long2ice/alarmer/actions/workflows/ci.yml/badge.svg)](https://github.com/long2ice/alarmer/actions/workflows/ci.yml)
 
 `Alarmer` is a tool focus on error reporting for your application.
 
