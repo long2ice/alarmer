@@ -24,7 +24,7 @@ class Alarmer:
     def send(cls, message: str):
         for p in cls._providers:
             t = p.throttling or cls._global_throttling
-            if t and t(p, message):
+            if (t and t(p, message)) or not t:
                 cls._pool.submit(p.send, message)
 
     @classmethod
@@ -32,8 +32,9 @@ class Alarmer:
         cls,
         providers: List[Provider],
         thread_pool_size: Optional[int] = None,
-        global_throttling: Throttling = Throttling(),
+        global_throttling: Optional[Throttling] = Throttling(),
     ):
+        better_exceptions.MAX_LENGTH = None
         cls._pool = ThreadPoolExecutor(max_workers=thread_pool_size)
         cls._global_throttling = global_throttling
         cls._old_except_hook = sys.excepthook
