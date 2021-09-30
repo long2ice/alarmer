@@ -1,5 +1,9 @@
-from apprise import Apprise
+from typing import List
+import better_exceptions
+
+from alerter.provider import Provider
 
 
-class Alerter(Apprise):
-    pass
+def init(providers: List[Provider]):
+    better_exceptions.MAX_LENGTH = None
+    better_exceptions.hook()

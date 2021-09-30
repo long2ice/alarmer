@@ -6,7 +6,7 @@ authors = ["long2ice <long2ice@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-apprise = "*"
+better-exceptions = "*"
 
 [tool.poetry.dev-dependencies]
 flake8 = "*"
