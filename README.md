@@ -1,7 +1,7 @@
 # alarmer
 
 [![image](https://img.shields.io/pypi/v/alarmer.svg?style=flat)](https://pypi.python.org/pypi/alarmer)
-[![image](https://img.shields.io/github/license/tortoise/alarmer)](https://github.com/tortoise/alarmer)
+[![image](https://img.shields.io/github/license/long2ice/alarmer)](https://github.com/long2ice/alarmer)
 [![pypi](https://github.com/long2ice/alarmer/actions/workflows/pypi.yml/badge.svg)](https://github.com/long2ice/alarmer/actions/workflows/pypi.yml)
 [![ci](https://github.com/long2ice/alarmer/actions/workflows/ci.yml/badge.svg)](https://github.com/long2ice/alarmer/actions/workflows/ci.yml)
 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
 ### Intercept Error Logging
 
-If you want to intercept the `ERROR` level logging, you can use `LoggingHandler`.
+If you want to intercept the logging, you can use `LoggingHandler`.
 
 ```py
 import logging
@@ -52,7 +52,7 @@ def main():
         level=logging.INFO,
     )
     logger = logging.getLogger()
-    logger.addHandler(LoggingHandler())
+    logger.addHandler(LoggingHandler(level=logging.ERROR))  # only error and above should be send
     logging.error("test logging")
 
 
@@ -83,18 +83,17 @@ from typing import List
 from alarmer.provider import Provider
 
 
-class EmailProvider(Provider):
-    def __init__(self, host: str, port: int, from_addr: str, to_addrs: List[str], **kwargs):
-        super().__init__()
-        self.smtp = smtplib.SMTP(host=host, port=port)
-        self.from_addr = from_addr
-        self.to_addrs = to_addrs
-        self.kwargs = kwargs
+class CustomProvider(Provider):
 
     def send(self, message: str):
-        self.smtp.sendmail(
-            from_addr=self.from_addr, to_addrs=self.to_addrs, msg=message, **self.kwargs
-        )
+        # Send to your custom provider here
+        pass
+```
+
+Then add it to `Alarmer.init`.
+
+```py
+Alarmer.init(providers=[CustomProvider()])
 ```
 
 ## Throttling
@@ -113,26 +112,18 @@ Alarmer.init(global_throttling=Throttling(), providers=[...])
 You can write your own throttling by inheriting the `Throttling` class.
 
 ```py
-import abc
-import threading
-import time
 import typing
 
+from alarmer.throttling import Throttling
+
 if typing.TYPE_CHECKING:
-    from alarmer import Provider
+    from alarmer.provider import Provider
 
 
-class Throttling(abc.ABC):
-    def __init__(self):
-        self.last_time = time.time()
-        self.lock = threading.Lock()
-
+class MyThrottling(Throttling):
     def __call__(self, provider: "Provider", message: str) -> bool:
-        with self.lock:
-            if time.time() - self.last_time < 1:
-                return False
-            self.last_time = time.time()
-            return True
+        # check whether the error message should be send
+        return True
 ```
 
 ## License
