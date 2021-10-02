@@ -90,10 +90,20 @@ class CustomProvider(Provider):
         pass
 ```
 
+In addition to this, you can just write a callable function which takes `message` argument.
+
+```py
+import requests
+
+
+def my_provider(message: str):
+    return requests.get('http://xxxx', params={'text': message})
+```
+
 Then add it to `Alarmer.init`.
 
 ```py
-Alarmer.init(providers=[CustomProvider()])
+Alarmer.init(providers=[CustomProvider(), my_provider])
 ```
 
 ## Throttling

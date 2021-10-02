@@ -4,11 +4,12 @@ import os
 from alarmer import Alarmer
 from alarmer.log import LoggingHandler
 from alarmer.provider.feishu import FeiShuProvider
+from examples.providers import my_provider
 
 
 def main():
     Alarmer.init(
-        providers=[FeiShuProvider(webhook_url=os.getenv("FEI_SHU_WEBHOOK_URL"))],
+        providers=[FeiShuProvider(webhook_url=os.getenv("FEI_SHU_WEBHOOK_URL")), my_provider],
         global_throttling=None,
     )
     logging.basicConfig(

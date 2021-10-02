@@ -14,7 +14,7 @@ class FeiShuProvider(Provider):
 
     def send(self, message: str):
         data = {"msg_type": "text", "content": {"text": message}}
-        requests.post(
+        return requests.post(
             self.webhook_url,
             json=data,
         )

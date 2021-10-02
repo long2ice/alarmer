@@ -14,7 +14,7 @@ class WeComProvider(Provider):
 
     def send(self, message: str):
         data = {"msgtype": "text", "content": {"text": message}}
-        requests.post(
+        return requests.post(
             self.webhook_url,
             json=data,
         )

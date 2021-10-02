@@ -12,7 +12,7 @@ class Throttling(abc.ABC):
         self.last_time = time.time()
         self.lock = threading.Lock()
 
-    def __call__(self, provider: "Provider", message: str) -> bool:
+    def __call__(self, provider: "typing.Union[Provider,typing.Callable]", message: str) -> bool:
         with self.lock:
             if time.time() - self.last_time < 1:
                 return False

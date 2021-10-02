@@ -13,6 +13,6 @@ class EmailProvider(Provider):
         self.kwargs = kwargs
 
     def send(self, message: str):
-        self.smtp.sendmail(
+        return self.smtp.sendmail(
             from_addr=self.from_addr, to_addrs=self.to_addrs, msg=message, **self.kwargs
         )

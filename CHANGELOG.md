@@ -5,6 +5,7 @@
 ### 0.1.2
 
 - Add `level` parameter to `LoggingHandler`.
+- Support `Callable` provider.
 
 ### 0.1.1
 
