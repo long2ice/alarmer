@@ -18,7 +18,9 @@ def main():
     logger = logging.getLogger()
     logger.addHandler(LoggingHandler())
     logging.error("test logging")
-    raise Exception("test")
+    a = 1
+    b = 0
+    a / b
 
 
 if __name__ == "__main__":
