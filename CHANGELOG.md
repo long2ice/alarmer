@@ -6,6 +6,7 @@
 
 - Add `level` parameter to `LoggingHandler`.
 - Support `Callable` provider.
+- Support [apprise](https://github.com/caronc/apprise).
 
 ### 0.1.1
 

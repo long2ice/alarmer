@@ -68,7 +68,9 @@ Now when you run the script, you will receive the errors in your provider.
 You can set number of providers for error reporting. All kinds of providers can be found
 in [providers](./alarmer/provider).
 
-- Email
+Thanks to [Apprise](https://github.com/caronc/apprise), you can use lots of providers out of box.
+
+- [Apprise](https://github.com/caronc/apprise)
 - [FeiShu](https://www.feishu.cn/hc/zh-CN/articles/360024984973)
 - [WeCom](https://work.weixin.qq.com/api/doc/90000/90136/91770)
 

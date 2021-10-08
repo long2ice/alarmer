@@ -17,6 +17,7 @@ include = ["CHANGELOG.md", "LICENSE", "README.md"]
 [tool.poetry.dependencies]
 python = "^3.7"
 better-exceptions = "*"
+apprise = "*"
 
 [tool.poetry.dev-dependencies]
 flake8 = "*"
