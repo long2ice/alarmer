@@ -2,6 +2,10 @@
 
 ## 0.1
 
+### 0.1.3
+
+- Pass `exception` in `send`.
+
 ### 0.1.2
 
 - Add `level` parameter to `LoggingHandler`.

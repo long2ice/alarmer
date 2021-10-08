@@ -21,14 +21,14 @@ class Alarmer:
         cls.send(message)
 
     @classmethod
-    def send(cls, message: str):
+    def send(cls, message: str, exc: Optional[BaseException] = None):
         for p in cls._providers:
             if isinstance(p, Provider):
                 t = p.throttling or cls._global_throttling
-                if (t and t(p, message)) or not t:
+                if (t and t(p, message, exc)) or not t:
                     cls._pool.submit(p.send, message)
             else:
-                if cls._global_throttling and cls._global_throttling(p, message):
+                if cls._global_throttling and cls._global_throttling(p, message, exc):
                     cls._pool.submit(p, message)
 
     @classmethod

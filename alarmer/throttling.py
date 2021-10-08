@@ -11,7 +11,12 @@ class Throttling:
         self.last_time = time.time()
         self.lock = threading.Lock()
 
-    def __call__(self, provider: "typing.Union[Provider,typing.Callable]", message: str) -> bool:
+    def __call__(
+        self,
+        provider: "typing.Union[Provider,typing.Callable]",
+        message: str,
+        exc: typing.Optional[BaseException] = None,
+    ) -> bool:
         with self.lock:
             if time.time() - self.last_time < 5:
                 return False

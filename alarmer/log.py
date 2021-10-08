@@ -10,4 +10,8 @@ class LoggingHandler(logging.Handler):
 
     def emit(self, record: logging.LogRecord) -> None:
         if record.levelno >= self.level:
-            Alarmer.send(record.getMessage())
+            exc_info = record.exc_info
+            exc = None
+            if exc_info:
+                exc = exc_info[1]
+            Alarmer.send(record.getMessage(), exc)
