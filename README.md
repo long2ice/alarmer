@@ -5,7 +5,7 @@
 [![pypi](https://github.com/long2ice/alarmer/actions/workflows/pypi.yml/badge.svg)](https://github.com/long2ice/alarmer/actions/workflows/pypi.yml)
 [![ci](https://github.com/long2ice/alarmer/actions/workflows/ci.yml/badge.svg)](https://github.com/long2ice/alarmer/actions/workflows/ci.yml)
 
-`Alarmer` is a tool focus on error reporting for your application.
+`Alarmer` is a tool focus on error reporting for your application, like [sentry](https://sentry.io) but lightweight.
 
 ## Installation
 
