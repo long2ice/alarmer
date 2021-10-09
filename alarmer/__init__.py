@@ -26,10 +26,10 @@ class Alarmer:
             if isinstance(p, Provider):
                 t = p.throttling or cls._global_throttling
                 if (t and t(p, message, exc)) or not t:
-                    cls._pool.submit(p.send, message)
+                    cls._pool.submit(p.send, message, exc)
             else:
                 if cls._global_throttling and cls._global_throttling(p, message, exc):
-                    cls._pool.submit(p, message)
+                    cls._pool.submit(p, message, exc)
 
     @classmethod
     def init(

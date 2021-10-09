@@ -8,5 +8,5 @@ class Provider(abc.ABC):
     def __init__(self, throttling: Optional[Throttling] = None):
         self.throttling = throttling
 
-    def send(self, message: str):
+    def send(self, message: str, exc: Optional[BaseException] = None):
         raise NotImplementedError

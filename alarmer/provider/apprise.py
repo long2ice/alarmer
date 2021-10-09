@@ -18,5 +18,5 @@ class AppriseProvider(Provider):
         self.app = apprise.Apprise(services, **(apprise_options or {}))
         self.notify_options = notify_options or {}
 
-    def send(self, message: str):
+    def send(self, message: str, exc: Optional[BaseException] = None):
         return self.app.notify(body=message, **self.notify_options)

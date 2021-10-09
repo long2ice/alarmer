@@ -1,2 +1,2 @@
-def test_email():
+def test_xxx():
     return

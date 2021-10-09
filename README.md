@@ -79,33 +79,34 @@ Thanks to [Apprise](https://github.com/caronc/apprise), you can use lots of prov
 You can write your own custom provider by inheriting the `Provider` class.
 
 ```py
-import smtplib
-from typing import List
-
+from typing import Optional
 from alarmer.provider import Provider
 
 
 class CustomProvider(Provider):
 
-    def send(self, message: str):
+    def send(self, message: str, exc: Optional[BaseException] = None):
         # Send to your custom provider here
         pass
 ```
 
-In addition to this, you can just write a callable function which takes `message` argument.
+In addition to this, you can just write a callable function which takes `message` and `exc` arguments.
 
 ```py
-import requests
+from typing import Optional
 
 
-def my_provider(message: str):
-    return requests.get('http://xxxx', params={'text': message})
+def custom_provider(message: str, exc: Optional[BaseException] = None):
+    # Send to your custom provider here
+    pass
 ```
 
 Then add it to `Alarmer.init`.
 
 ```py
-Alarmer.init(providers=[CustomProvider(), my_provider])
+from alarmer import Alarmer
+
+Alarmer.init(providers=[CustomProvider(), custom_provider])
 ```
 
 ## Throttling
@@ -133,9 +134,20 @@ if typing.TYPE_CHECKING:
 
 
 class MyThrottling(Throttling):
-    def __call__(self, provider: "Provider", message: str) -> bool:
+    def __call__(self, provider: "typing.Union[Provider,typing.Callable]", message: str,
+                 exc: typing.Optional[BaseException] = None, ) -> bool:
         # check whether the error message should be send
         return True
+```
+
+## Manual Send
+
+If you want to manually send messages to the providers, just call `Alarmer.send`.
+
+```py
+from alarmer import Alarmer
+
+Alarmer.send("message")
 ```
 
 ## License

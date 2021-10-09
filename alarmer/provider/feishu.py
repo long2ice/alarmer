@@ -1,3 +1,5 @@
+from typing import Optional
+
 import requests
 
 from alarmer import Provider
@@ -12,7 +14,7 @@ class FeiShuProvider(Provider):
         super().__init__()
         self.webhook_url = webhook_url
 
-    def send(self, message: str):
+    def send(self, message: str, exc: Optional[BaseException] = None):
         data = {"msg_type": "text", "content": {"text": message}}
         return requests.post(
             self.webhook_url,
