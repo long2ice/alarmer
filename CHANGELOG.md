@@ -4,7 +4,7 @@
 
 ### 0.1.3
 
-- Pass `exception` in `send` and provider.
+- Pass `exception`,`context` in `send` and provider.
 
 ### 0.1.2
 

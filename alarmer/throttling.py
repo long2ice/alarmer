@@ -16,6 +16,7 @@ class Throttling:
         provider: "typing.Union[Provider,typing.Callable]",
         message: str,
         exc: typing.Optional[BaseException] = None,
+        context: typing.Optional[dict] = None,
     ) -> bool:
         with self.lock:
             if time.time() - self.last_time < 5:

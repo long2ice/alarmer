@@ -85,7 +85,7 @@ from alarmer.provider import Provider
 
 class CustomProvider(Provider):
 
-    def send(self, message: str, exc: Optional[BaseException] = None):
+    def send(self, message: str, exc: Optional[BaseException] = None, context: Optional[dict] = None):
         # Send to your custom provider here
         pass
 ```
@@ -96,7 +96,7 @@ In addition to this, you can just write a callable function which takes `message
 from typing import Optional
 
 
-def custom_provider(message: str, exc: Optional[BaseException] = None):
+def custom_provider(message: str, exc: Optional[BaseException] = None, context: Optional[dict] = None):
     # Send to your custom provider here
     pass
 ```
@@ -135,7 +135,7 @@ if typing.TYPE_CHECKING:
 
 class MyThrottling(Throttling):
     def __call__(self, provider: "typing.Union[Provider,typing.Callable]", message: str,
-                 exc: typing.Optional[BaseException] = None, ) -> bool:
+                 exc: typing.Optional[BaseException] = None, context: typing.Optional[dict] = None) -> bool:
         # check whether the error message should be send
         return True
 ```

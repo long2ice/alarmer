@@ -16,20 +16,31 @@ class Alarmer:
 
     @classmethod
     def except_hook(cls, exc, value, tb):
+        context = None
+        if tb is not None:
+            prev = tb
+            curr = tb.tb_next
+            while curr is not None:
+                prev = curr
+                curr = curr.tb_next
+            context = prev.tb_frame.f_locals
         cls._old_except_hook(exc, value, tb)
         message = "".join(better_exceptions.format_exception(exc, value, tb))
-        cls.send(message)
+        cls.send(message, exc, context)
 
     @classmethod
-    def send(cls, message: str, exc: Optional[BaseException] = None):
+    def send(
+        cls, message: str, exc: Optional[BaseException] = None, context: Optional[dict] = None
+    ):
         for p in cls._providers:
             if isinstance(p, Provider):
                 t = p.throttling or cls._global_throttling
-                if (t and t(p, message, exc)) or not t:
-                    cls._pool.submit(p.send, message, exc)
+                if (t and t(p, message, exc, context)) or not t:
+                    message = p.build_message(message, exc, context)
+                    cls._pool.submit(p.send, message, exc, context)
             else:
-                if cls._global_throttling and cls._global_throttling(p, message, exc):
-                    cls._pool.submit(p, message, exc)
+                if cls._global_throttling and cls._global_throttling(p, message, exc, context):
+                    cls._pool.submit(p, message, exc, context)
 
     @classmethod
     def init(
