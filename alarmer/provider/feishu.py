@@ -23,35 +23,44 @@ class FeiShuProvider(Provider):
     def send(
         self, message: str, exc: Optional[BaseException] = None, context: Optional[dict] = None
     ):
-        context_content = json.dumps(context, indent=4, cls=ComplexEncoder)
         data: dict = {
-            "msg_type": "post",
-            "content": {
-                "post": {
-                    "zh_cn": {
-                        "content": [
-                            [
-                                {"tag": "text", "text": message},
-                                {"tag": "text", "text": "Context Variables:\n"},
-                                {"tag": "text", "text": context_content},
-                            ]
-                        ],
+            "msg_type": "interactive",
+            "card": {
+                "header": {
+                    "title": {
+                        "content": f"Exception Alarm: {exc}" if exc else "Alarm",
+                        "tag": "plain_text",
                     },
-                    "en_us": {
-                        "content": [
-                            [
-                                {"tag": "text", "text": message},
-                                {"tag": "text", "text": "上下文变量：\n"},
-                                {"tag": "text", "text": context_content},
-                            ]
-                        ],
+                    "template": "red",
+                },
+                "elements": [
+                    {
+                        "tag": "div",
+                        "text": {"content": message, "tag": "plain_text"},
                     },
-                }
+                ],
             },
         }
-        if exc:
-            data["content"]["post"]["zh_cn"]["title"] = f"异常告警：{exc}"
-            data["content"]["post"]["en_us"]["title"] = f"Exception Alarm: {exc}"
+        if context:
+            context_content = json.dumps(context, indent=4, cls=ComplexEncoder)
+            data["card"]["elements"].extend(
+                [
+                    {"tag": "hr"},
+                    {
+                        "tag": "div",
+                        "fields": [
+                            {
+                                "is_short": True,
+                                "text": {"tag": "lark_md", "content": "**Context Variables:**"},
+                            },
+                            {
+                                "is_short": False,
+                                "text": {"tag": "plain_text", "content": context_content},
+                            },
+                        ],
+                    },
+                ]
+            )
         return requests.post(
             self.webhook_url,
             json=data,
