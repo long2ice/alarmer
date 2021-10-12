@@ -5,6 +5,7 @@
 ### 0.1.3
 
 - Pass `exception`,`context` in `send` and provider.
+- Add `Alarmer.build_message` method.
 
 ### 0.1.2
 

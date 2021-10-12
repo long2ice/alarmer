@@ -16,7 +16,8 @@ class Provider(abc.ABC):
         if context:
             message = (
                 message
-                + f'{"-" * 100}\nContext Variables:\n'
+                + "-" * len(message.split("\n")[-2])
+                + "\nContext Variables:\n"
                 + json.dumps(context, indent=4, cls=ComplexEncoder)
             )
         return message
