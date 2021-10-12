@@ -2,7 +2,7 @@ from typing import Optional
 
 import requests
 
-from alarmer import Provider
+from alarmer import Provider, Throttling
 
 
 class WeComProvider(Provider):
@@ -10,8 +10,12 @@ class WeComProvider(Provider):
     https://work.weixin.qq.com/api/doc/90000/90136/91770
     """
 
-    def __init__(self, webhook_url: str):
-        super().__init__()
+    def __init__(
+        self,
+        webhook_url: str,
+        throttling: Optional[Throttling] = None,
+    ):
+        super().__init__(throttling)
         self.webhook_url = webhook_url
 
     def send(
