@@ -2,6 +2,10 @@
 
 ## 0.1
 
+### 0.1.4
+
+- Update `FeiShuProvider`.
+
 ### 0.1.3
 
 - Pass `exception`,`context` in `send` and provider.
