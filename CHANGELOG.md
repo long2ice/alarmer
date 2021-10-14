@@ -5,6 +5,8 @@
 ### 0.1.4
 
 - Update `FeiShuProvider`.
+- Update `AppriseProvider`.
+- Add `environment` to `init`.
 
 ### 0.1.3
 

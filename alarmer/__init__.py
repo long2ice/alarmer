@@ -13,6 +13,7 @@ class Alarmer:
     _providers: List[Union[Provider, Callable]]
     _pool: ThreadPoolExecutor
     _global_throttling: Optional[Throttling]
+    environment: str
 
     @classmethod
     def except_hook(cls, exc, value, tb):
@@ -47,10 +48,12 @@ class Alarmer:
         providers: List[Union[Provider, Callable]],
         thread_pool_size: Optional[int] = None,
         global_throttling: Optional[Throttling] = Throttling(),
+        environment: str = "production",
     ):
         better_exceptions.MAX_LENGTH = None
         cls._global_throttling = global_throttling
         cls._old_except_hook = sys.excepthook
+        cls.environment = environment
         cls._providers = providers
         sys.excepthook = cls.except_hook
         cls._pool = ThreadPoolExecutor(max_workers=thread_pool_size)
