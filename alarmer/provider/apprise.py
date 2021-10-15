@@ -2,7 +2,7 @@ from typing import List, Optional
 
 import apprise
 
-from alarmer import Alarmer, Throttling
+from alarmer import Throttling
 from alarmer.provider import Provider
 
 
@@ -21,10 +21,5 @@ class AppriseProvider(Provider):
     def send(
         self, message: str, exc: Optional[BaseException] = None, context: Optional[dict] = None
     ):
-        title = (
-            f"[{Alarmer.environment}] Exception Alarm: {exc}"
-            if exc
-            else f"[{Alarmer.environment}] Alarm"
-        )
-
+        title = self.get_title(message, exc, context)
         return self.app.notify(title=title, body=message, **self.notify_options)

@@ -3,7 +3,7 @@ from typing import Optional
 
 import requests
 
-from alarmer import Alarmer, Provider, Throttling
+from alarmer import Provider, Throttling
 from alarmer.encoder import ComplexEncoder
 
 
@@ -28,9 +28,7 @@ class FeiShuProvider(Provider):
             "card": {
                 "header": {
                     "title": {
-                        "content": f"[{Alarmer.environment}] Exception Alarm: {exc}"
-                        if exc
-                        else f"[{Alarmer.environment}] Alarm",
+                        "content": self.get_title(message, exc, context),
                         "tag": "plain_text",
                     },
                     "template": "red",

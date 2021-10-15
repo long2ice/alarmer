@@ -2,6 +2,10 @@
 
 ## 0.1
 
+### 0.1.5
+
+- Add `get_title` method to `Provider`.
+
 ### 0.1.4
 
 - Update `FeiShuProvider`.
