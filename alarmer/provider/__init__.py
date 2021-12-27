@@ -1,7 +1,6 @@
 import abc
 from typing import Optional
 
-from alarmer import Alarmer
 from alarmer.throttling import Throttling
 
 
@@ -12,6 +11,8 @@ class Provider(abc.ABC):
     def get_title(
         self, message: str, exc: Optional[BaseException] = None, context: Optional[dict] = None
     ):
+        from alarmer import Alarmer
+
         return (
             f"[{Alarmer.environment}] Exception Alarm: {exc}"
             if exc
