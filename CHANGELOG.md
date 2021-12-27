@@ -5,6 +5,7 @@
 ### 0.1.5
 
 - Add `get_title` method to `Provider`.
+- Fix `Throttling` default time.
 
 ### 0.1.4
 

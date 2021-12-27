@@ -8,7 +8,7 @@ if typing.TYPE_CHECKING:
 
 class Throttling:
     def __init__(self):
-        self.last_time = time.time()
+        self.last_time = 0
         self.lock = threading.Lock()
 
     def __call__(
